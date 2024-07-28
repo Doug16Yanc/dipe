@@ -16,19 +16,19 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public Student saveStudent(StudentDTO studentDTO) throws EntityAlreadyExistsException {
-        var existent = studentRepository.findByCPF(studentDTO.cpf());
+    public Student saveStudent(StudentDTO studentDTO) {
+        var existent = studentRepository.findByCpf(studentDTO.cpf());
 
         if (existent.isPresent()) {
-            throw new EntityAlreadyExistsException("Student data already exists. Checking the possibility of update, please!");
+            new EntityAlreadyExistsException("Student data already exists. Checking the possibility of update, please!");
         }
         return studentRepository.save(studentDTO.doStudent());
     }
-    public Optional<Student> findByRegistration(StudentDTO studentDTO){
-        return studentRepository.findByRegistration(studentDTO.registration());
+    public Optional<Student> findByRegistration(Long registration){
+        return studentRepository.findByRegistration(registration);
     }
-    public Optional<Student> findByCPF(StudentDTO studentDTO){
-        return studentRepository.findByCPF(studentDTO.cpf());
+    public Optional<Student> findByCPF(String cpf){
+        return studentRepository.findByCpf(cpf);
     }
     public List<Student> findAll() {
         return (List<Student>) studentRepository.findAll();

@@ -1,6 +1,7 @@
 package douglas.dipe.domain.model;
 
 import java.util.Date;
+import java.util.Set;
 
 public class Student {
     private Long id;
@@ -9,14 +10,16 @@ public class Student {
     private String name;
     private Date birthday;
     private Address address;
+    private Set<Role> roles;
 
-    public Student(Long id, Long registration, String cpf, String name, Date birthday, Address address) {
+    public Student(Long id, Long registration, String cpf, String name, Date birthday, Address address, Set<Role> roles) {
         this.id = id;
         this.registration = registration;
         this.cpf = cpf;
         this.name = name;
         this.birthday = birthday;
         this.address = address;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -65,5 +68,13 @@ public class Student {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends MongoRepository <Student, Long> {
-    Optional<Student> findByCPF(String CPF);
+    Optional<Student> findByCpf(String cpf);
     Optional<Student> findByRegistration(Long registration);
 }

@@ -1,6 +1,9 @@
 package douglas.dipe.domain.model;
 
-import douglas.dipe.domain.enums.TypeSchoolPerson;
+import douglas.dipe.adapters.in.dto.LoginRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.*;
 
 public class SchoolPerson {
     private Long id;
@@ -8,16 +11,23 @@ public class SchoolPerson {
     private String name;
     private String telephone;
     private String email;
-    private TypeSchoolPerson typeSchoolPerson;
+    private String username;
+    private String password;
+    private Set<Role> roles;
 
+    public SchoolPerson() {
 
-    public SchoolPerson(Long id, String name, String cpf, String telephone, String email, TypeSchoolPerson typeSchoolPerson) {
+    }
+
+    public SchoolPerson(Long id, String name, String cpf, String telephone, String email, String username, String password, Set<Role> roles) {
         this.id = id;
         this.cpf = cpf;
         this.name = name;
         this.telephone = telephone;
         this.email = email;
-        this.typeSchoolPerson = typeSchoolPerson;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -59,11 +69,30 @@ public class SchoolPerson {
         this.email = email;
     }
 
-    public TypeSchoolPerson getTypeSchoolPerson() {
-        return typeSchoolPerson;
+    public String getUsername() {
+        return username;
     }
 
-    public void setTypeSchoolPerson(TypeSchoolPerson typeSchoolPerson) {
-        this.typeSchoolPerson = typeSchoolPerson;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+    public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(loginRequest.password(), this.password);
     }
 }
